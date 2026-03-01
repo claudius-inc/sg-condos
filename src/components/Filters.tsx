@@ -13,6 +13,8 @@ export interface FilterValues {
   district: string;
   tenure: string;
   status: string;
+  minPrice: string;
+  maxPrice: string;
   minPsf: string;
   maxPsf: string;
   bedrooms: string;
@@ -42,6 +44,8 @@ export function Filters({ filters, onFilterChange, developers }: FiltersProps) {
       district: "",
       tenure: "",
       status: "",
+      minPrice: "",
+      maxPrice: "",
       minPsf: "",
       maxPsf: "",
       bedrooms: "",
@@ -141,44 +145,85 @@ export function Filters({ filters, onFilterChange, developers }: FiltersProps) {
 
         {/* Expanded filters */}
         {isExpanded && (
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-3 pt-3 border-t">
-            <div>
-              <label className="text-xs text-muted-foreground mb-1 block">
-                Min PSF
-              </label>
-              <Input
-                type="number"
-                placeholder="Min PSF"
-                value={filters.minPsf}
-                onChange={(e) => updateFilter("minPsf", e.target.value)}
-              />
+          <div className="space-y-3 pt-3 border-t">
+            {/* Budget filters */}
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
+              <div>
+                <label className="text-xs text-muted-foreground mb-1 block">
+                  Min Budget ($)
+                </label>
+                <Select
+                  value={filters.minPrice}
+                  onChange={(e) => updateFilter("minPrice", e.target.value)}
+                >
+                  <option value="">No Min</option>
+                  <option value="500000">$500K</option>
+                  <option value="800000">$800K</option>
+                  <option value="1000000">$1M</option>
+                  <option value="1500000">$1.5M</option>
+                  <option value="2000000">$2M</option>
+                  <option value="3000000">$3M</option>
+                  <option value="5000000">$5M</option>
+                </Select>
+              </div>
+              <div>
+                <label className="text-xs text-muted-foreground mb-1 block">
+                  Max Budget ($)
+                </label>
+                <Select
+                  value={filters.maxPrice}
+                  onChange={(e) => updateFilter("maxPrice", e.target.value)}
+                >
+                  <option value="">No Max</option>
+                  <option value="1000000">$1M</option>
+                  <option value="1500000">$1.5M</option>
+                  <option value="2000000">$2M</option>
+                  <option value="3000000">$3M</option>
+                  <option value="5000000">$5M</option>
+                  <option value="10000000">$10M</option>
+                </Select>
+              </div>
+              <div>
+                <label className="text-xs text-muted-foreground mb-1 block">
+                  Min PSF
+                </label>
+                <Input
+                  type="number"
+                  placeholder="e.g. 1500"
+                  value={filters.minPsf}
+                  onChange={(e) => updateFilter("minPsf", e.target.value)}
+                />
+              </div>
+              <div>
+                <label className="text-xs text-muted-foreground mb-1 block">
+                  Max PSF
+                </label>
+                <Input
+                  type="number"
+                  placeholder="e.g. 2500"
+                  value={filters.maxPsf}
+                  onChange={(e) => updateFilter("maxPsf", e.target.value)}
+                />
+              </div>
             </div>
-            <div>
-              <label className="text-xs text-muted-foreground mb-1 block">
-                Max PSF
-              </label>
-              <Input
-                type="number"
-                placeholder="Max PSF"
-                value={filters.maxPsf}
-                onChange={(e) => updateFilter("maxPsf", e.target.value)}
-              />
-            </div>
-            <div>
-              <label className="text-xs text-muted-foreground mb-1 block">
-                TOP Year
-              </label>
-              <Select
-                value={filters.topYear}
-                onChange={(e) => updateFilter("topYear", e.target.value)}
-              >
-                <option value="">Any Year</option>
-                {[2025, 2026, 2027, 2028, 2029, 2030].map((y) => (
-                  <option key={y} value={y.toString()}>
-                    {y}
-                  </option>
-                ))}
-              </Select>
+            {/* TOP Year */}
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
+              <div>
+                <label className="text-xs text-muted-foreground mb-1 block">
+                  TOP Year
+                </label>
+                <Select
+                  value={filters.topYear}
+                  onChange={(e) => updateFilter("topYear", e.target.value)}
+                >
+                  <option value="">Any Year</option>
+                  {[2025, 2026, 2027, 2028, 2029, 2030].map((y) => (
+                    <option key={y} value={y.toString()}>
+                      {y}
+                    </option>
+                  ))}
+                </Select>
+              </div>
             </div>
           </div>
         )}

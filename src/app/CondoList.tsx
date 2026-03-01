@@ -16,6 +16,8 @@ export function CondoList({ condos, developers }: CondoListProps) {
     district: "",
     tenure: "",
     status: "",
+    minPrice: "",
+    maxPrice: "",
     minPsf: "",
     maxPsf: "",
     bedrooms: "",
@@ -45,6 +47,16 @@ export function CondoList({ condos, developers }: CondoListProps) {
       // Status filter
       if (filters.status && condo.status !== filters.status) {
         return false;
+      }
+
+      // Min Price filter
+      if (filters.minPrice && condo.min_price) {
+        if (condo.min_price < parseInt(filters.minPrice)) return false;
+      }
+
+      // Max Price filter
+      if (filters.maxPrice && condo.max_price) {
+        if (condo.min_price && condo.min_price > parseInt(filters.maxPrice)) return false;
       }
 
       // Min PSF filter

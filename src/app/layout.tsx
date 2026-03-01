@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import Link from "next/link";
-import { Building2, Map, Heart, Home } from "lucide-react";
+import { Building2, Map, Home } from "lucide-react";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -36,13 +36,7 @@ function Navigation() {
               <Map className="h-4 w-4" />
               <span className="hidden sm:inline">Map</span>
             </Link>
-            <Link
-              href="/shortlist"
-              className="flex items-center gap-2 px-3 py-2 text-sm rounded-md hover:bg-accent transition-colors"
-            >
-              <Heart className="h-4 w-4" />
-              <span className="hidden sm:inline">Shortlist</span>
-            </Link>
+
           </div>
         </div>
       </div>
